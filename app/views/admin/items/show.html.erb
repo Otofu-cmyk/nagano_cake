@@ -1,0 +1,43 @@
+<%= render 'layouts/admin' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-2">
+      <h3>商品詳細</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <%= attachment_image_tag @item , :image , size: "250x150" , format: 'jpeg' %>
+    </div>
+    <div class="col-6">
+      <table>
+        <tr>
+          <td>商品名</td><td> <%= @item.name %> </td>
+        </tr>
+        <tr>
+          <td>商品説明</td><td> <%= @item.introduction %> </td>
+        </tr>
+        <tr>
+          <td>ジャンル</td><td> <%= @item.genre.name %> </td>
+        </tr>
+        <tr>
+          <td>税込価格<br>(税抜価格)</td><td> <%= @item.price*1.1 %> (<%= @item.price %>) 円 </td>
+        </tr>
+        <tr>
+          <td>
+            販売ステータス
+          </td>
+          <td>
+            <% if @item.is_active==true %>
+              販売中
+            <% else %>
+              売切れ
+            <% end %>
+          </td>
+        </tr>
+      </table>
+      <p><%= link_to "編集する" , edit_admin_item_path(params[:id]) %></p>
+    </div>
+  </div>
+</div>

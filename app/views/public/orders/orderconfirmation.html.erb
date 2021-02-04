@@ -1,0 +1,74 @@
+<%= render 'layouts/public' %>
+
+<div class="container">
+  <div class="row">
+    <div clsss="col-3">
+      <h3>注文情報確認</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-7">
+      <table border="1">
+        <thead>
+          <tr>
+            <th>商品</th><th>単価(税込)</th><th>数量</th><th>小計</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% @cart_items.each do |cart_item| %>
+            <tr>
+              <td>
+                <%= attachment_image_tag cart_item.item , :image , format: 'jpeg' , size: "75x50" %>
+                <%= cart_item.item.name %>
+              </td>
+              <td>
+                <%= cart_item.item.price*1.1 %>
+              </td>
+              <td>
+                <%= cart_item.amount %>
+              </td>
+              <td>
+                <%= cart_item.item.price*1.1*cart_item.amount %>
+              </td>
+            </tr>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+    <div class="col-3">
+      <table border="1">
+        <tr>
+          <th>送料</th><td>800</td>
+        </tr>
+        <tr>
+          <th>商品合計</th><td><%= @total_amount %></td>
+        </tr>
+        <tr>
+          <th>請求金額</th><td><%= @total_amount+800 %></td>
+        </tr>
+      </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-1">支払方法</div>
+    <div class="col-6"><%= @payment_method %></div>
+  </div>
+  <div class="row">
+    <div clsss="col-1">お届け先</div>
+    <div class="col-6">〒<%= @postal_code %> <%= @address %><br><%= @name %></div>
+  </div>
+  <div class="row">
+    <div class="col-3">
+      <%= form_with model: @order , local: true do |f| %>
+        <%= f.hidden_field :customer_id , value: current_customer.id %>
+        <%= f.hidden_field :shipping_postal_code , value: @postal_code %>
+        <%= f.hidden_field :shipping_address , value: @address %>
+        <%= f.hidden_field :shipping_name , value: @name %>
+        <%= f.hidden_field :payment_method , value: @payment_method %>
+        <%= f.hidden_field :billing_amount , value: @total_amount+800 %>
+        <%= f.hidden_field :shipping , value: 800 %>
+        <%= f.submit "注文を確定する" %>
+      <% end %>
+    </div>
+  </div>
+</div>

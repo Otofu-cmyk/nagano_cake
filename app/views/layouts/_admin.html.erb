@@ -1,0 +1,49 @@
+<header>
+  <div class="container">
+    <div class="row">
+      <div class="col-3">
+        LOGO
+      </div>
+      <div class="col-6">
+        <% if admin_admin_signed_in? %>
+          <!--管理者ログイン後-->
+          <li>
+            <%= link_to "商品一覧" , admin_items_path %>
+          </li>
+          <li>
+            <%= link_to "会員一覧" , admin_customers_path %>
+          </li>
+          <li>
+            <%= link_to "注文一覧画面" , admin_root_path %>
+          </li>
+          <li>
+            <%= link_to "ジャンル一覧" , admin_genres_path %>
+          </li>
+          <li>
+            <%= link_to "ログアウト" , destroy_admin_admin_session_path , method: :delete %>
+          </li>
+          <%= form_tag (root_path) do %>
+            <%= text_field_tag :name , "" , placeholder:"Search" %>
+            <%= button_tag :type => "submit" do %>
+              <i class="fas fa-search" style="transform:scaleX(-1); , display:inline-block;"></i>
+            <% end %>
+          <% end %>
+        <% else %>
+          <!--ログイン前-->
+          <li>
+            <%= link_to "About" , about_path %>
+          </li>
+          <li>
+            <%= link_to "商品一覧" , items_path %>
+          </li>
+          <li>
+            <%= link_to "新規登録" , new_admin_admin_registration_path %>
+          </li>
+          <li>
+            <%= link_to "ログイン" , new_admin_admin_session_path %>
+          </li>
+        <% end %>
+      </div>
+    </div>
+  </div>
+</header>

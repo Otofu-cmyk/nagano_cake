@@ -1,0 +1,29 @@
+<%= render 'layouts/public' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <h3>注文情報入力</h3>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-10">
+      <h4>支払方法</h4>
+      <%= form_tag(orders_orderconfirmation_path , method: :post) do %>
+        <%= radio_button_tag("payment_method" , "クレジットカード" , true) %><%= label_tag :クレジットカード%><br>
+        <%= radio_button_tag("payment_method" , "銀行振込") %><%= label_tag :銀行振込 %><br>
+        <h4>お届け先</h4>
+        <%= radio_button_tag("radio_address" , "customer_address" , true) %><%= label_tag :ご自身の住所 %><br>
+          〒<%= current_customer.postal_code %> <%= current_customer.address %><br>
+          <%= current_customer.last_name %><%= current_customer.first_name %><br>
+        <%= radio_button_tag("radio_address" , "address_address") %><%= label_tag :登録済み住所から選択 %><br>
+          <%= select_tag "address_address" , options_for_select(@addresses) %><br>
+        <%= radio_button_tag("radio_address" , "new_address") %><%= label_tag :新しいお届け先 %><br>
+          <%= label_tag :郵便番号（ハイフンなし） %><%= text_field_tag :postal_code , "" , placeholder: "0000000" %><br>
+          <%= label_tag :住所 %><%= text_field_tag :address , "" , placeholder: "東京都渋谷区代々木神園町0-0" , size:60 %><br>
+          <%= label_tag :宛名 %><%= text_field_tag :name , "" , placeholder: "令和道子" %><br>
+        <%= submit_tag "確認画面へ進む" %>
+      <% end %>
+    </div>
+  </div>
+</div>

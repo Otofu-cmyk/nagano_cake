@@ -1,0 +1,23 @@
+<%= render 'layouts/public' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <%= attachment_image_tag @item , :image , format: 'jpeg' , size: "200x150" %>
+    </div>
+    <div class="col-6">
+      <h3><%= @item.name %></h3>
+      <p><%= @item.introduction %></p>
+      <p>￥<%= @item.price*1.1 %>(税込)</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <%= form_with model: @cart_item , local: true do |f| %>
+        <%= f.number_field :amount , size:60 , min:1 , placeholder: "個数選択" %>
+        <%= f.hidden_field :item_id , value: @item.id %>
+        <%= f.submit "カートに入れる" %>
+      <% end %>
+    </div>
+  </div>
+</div>

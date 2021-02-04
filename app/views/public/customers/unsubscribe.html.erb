@@ -1,0 +1,24 @@
+<%= render 'layouts/public' %>
+
+<div class="container">
+  <div class="row">
+    <div class="col-3">
+      <h4>本当に退会しますか？</h4>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-6">
+      <p>退会すると、会員登録情報や<br>
+      これまでの購入履歴が閲覧できなくなります。<br>
+      退会する場合は、「退会する」をクリックしてください。</p>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-2">
+      <%= link_to "退会しない" , customers_path %>
+    </div>
+    <div class="col-2">
+      <%= link_to "退会する" , customers_withdraw_path , method: :patch %>
+    </div>
+  </div>
+</div>
