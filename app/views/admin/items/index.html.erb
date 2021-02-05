@@ -2,18 +2,18 @@
 
 <div class="controller">
   <div class="row">
-    <div class="col-2">
+    <div class="col-2 offset-1">
       <h3>商品一覧</h3>
     </div>
-    <div class="col-1">
+    <div class="col-1 offset-10">
       <%= link_to new_admin_item_path do %>
         <i class="fas fa-plus-circle"></i>
       <% end %>
     </div>
   </div>
   <div class="row">
-    <div class="col-10">
-      <table border="1">
+    <div class="col-10 offset-1">
+      <table class="table table-bordered">
         <thead>
           <tr>
             <th>商品ID</th><th>商品名</th><th>税抜価格</th><th>ジャンル</th><th>ステータス</th>
@@ -28,7 +28,7 @@
                   <%= item.name %>
                 <% end %>
               </td>
-              <td><%= item.price %></td>
+              <td><%= number_with_delimiter(item.price , :precision => 0) %></td>
               <td><%= item.genre.name %></td>
               <% if item.is_active==true %>
                 <td>販売中</td>
@@ -38,14 +38,12 @@
             </tr>
           <% end %>
         </tbody>
-        <tfoot>
-          <tr>
-            <td colspan="5">
-              <%= paginate @items %>
-            </td>
-          </tr>
-        </tfoot>
       </table>
+    </div>
+  </div>
+  <div class="row">
+    <div class="col-7 offset-5">
+      <%= paginate @items %>
     </div>
   </div>
 </div>
